@@ -1,0 +1,54 @@
+terraform {
+  required_providers {
+    juju = {
+      source  = "juju/juju"
+      version = "0.8.0"
+    }
+  }
+}
+provider "juju" {}
+
+resource "juju_model" "app" {
+  name = "app"
+}
+
+resource "juju_model" "db" {
+  name = "db"
+}
+
+resource "juju_application" "hello_juju" {
+  name  = "myapp"
+  model = juju_model.app.name
+
+  charm {
+    name = "hello-juju"
+  }
+}
+
+resource "juju_application" "postgresql" {
+  name  = "database"
+  model = juju_model.db.name
+
+  charm {
+    name = "postgresql"
+  }
+}
+
+resource "juju_offer" "postgresql_offer" {
+  model            = juju_model.db.name
+  application_name = juju_application.postgresql.name
+  endpoint         = "db"
+}
+
+resource "juju_integration" "postgresql_hello_juju" {
+  model = juju_model.app.name
+
+  application {
+    name     = juju_application.hello_juju.name
+    endpoint = "db"
+  }
+
+  application {
+    offer_url = juju_offer.postgresql_offer.url
+  }
+}
