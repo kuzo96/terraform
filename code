@@ -1,0 +1,131 @@
+terraform {
+  required_providers {
+    juju = {
+      source  = "juju/juju"
+      version = "0.8.0"
+    }
+  }
+}
+provider "juju" {}
+
+resource "juju_model" "development" {
+  name = "dev"
+}
+
+resource "juju_application" "hello-kubecon" {
+  name  = "hello-kubecon"
+  model = juju_model.development.name
+
+  charm {
+    name = "hello-kubecon"
+  }
+}
+
+resource "juju_application" "zinc" {
+  name  = "zinc"
+  model = juju_model.development.name
+  trust = true
+
+  charm {
+    name = "zinc-k8s"
+  }
+}
+
+resource "juju_application" "grafana" {
+  name  = "grafana"
+  model = juju_model.development.name
+  trust = true
+
+  charm {
+    name    = "grafana-k8s"
+    channel = "beta"
+  }
+}
+
+resource "juju_application" "prometheus" {
+  name  = "prometheus"
+  model = juju_model.development.name
+  trust = true
+
+  charm {
+    name    = "prometheus-k8s"
+    channel = "beta"
+  }
+}
+
+resource "juju_application" "parca" {
+  name  = "parca"
+  model = juju_model.development.name
+  trust = true
+
+  charm {
+    name    = "parca-k8s"
+    channel = "edge"
+  }
+
+  config = {
+    enable-persistence = "true"
+  }
+}
+
+resource "juju_integration" "prometheus-grafana" {
+  model = juju_model.development.name
+
+  application {
+    name     = juju_application.prometheus.name
+    endpoint = "grafana-source"
+  }
+
+  application {
+    name     = juju_application.grafana.name
+    endpoint = "grafana-source"
+  }
+}
+
+resource "juju_integration" "prometheus-zinc" {
+  model = juju_model.development.name
+
+  application {
+    name = juju_application.prometheus.name
+  }
+
+  application {
+    name = juju_application.zinc.name
+  }
+}
+
+resource "juju_integration" "grafana-zinc" {
+  model = juju_model.development.name
+
+  application {
+    name = juju_application.grafana.name
+  }
+
+  application {
+    name = juju_application.zinc.name
+  }
+}
+
+resource "juju_integration" "parca-zinc" {
+  model = juju_model.development.name
+
+  application {
+    name = juju_application.parca.name
+  }
+
+  application {
+    name = juju_application.zinc.name
+  }
+}
+
+resource "juju_integration" "parca-prometheus" {
+  model = juju_model.development.name
+
+  application {
+    name = juju_application.prometheus.name
+  }
+
+  application {
+    name = juju_application.parca.name
+  }
+}
