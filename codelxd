@@ -37,7 +37,7 @@ resource "juju_application" "postgresql" {
 resource "juju_offer" "postgresql_offer" {
   model            = juju_model.db.name
   application_name = juju_application.postgresql.name
-  endpoint         = "db2"
+  endpoint         = "db"
 }
 
 resource "juju_integration" "postgresql_hello_juju" {
@@ -45,7 +45,7 @@ resource "juju_integration" "postgresql_hello_juju" {
 
   application {
     name     = juju_application.hello_juju.name
-    endpoint = "db2"
+    endpoint = "db"
   }
 
   application {
