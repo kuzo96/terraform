@@ -2,7 +2,7 @@ terraform {
   required_providers {
     juju = {
       source  = "juju/juju"
-      version = "0.8.0"
+      version = "0.12.0"
     }
   }
 }
@@ -15,7 +15,6 @@ resource "juju_model" "development" {
 resource "juju_application" "hello-kubecon" {
   name  = "hello-kubecon"
   model = juju_model.development.name
-
   charm {
     name = "hello-kubecon"
   }
