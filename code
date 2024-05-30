@@ -7,7 +7,6 @@ terraform {
   }
 }
 provider "juju" {
-alias = "aliascode"
 }
 
 resource "juju_model" "development" {
