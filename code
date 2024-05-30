@@ -37,7 +37,7 @@ resource "juju_application" "grafana" {
 
   charm {
     name    = "grafana-k8s"
-    channel = "stable"
+    channel = "latest/stable"
   }
 }
 
@@ -48,7 +48,7 @@ resource "juju_application" "prometheus" {
 
   charm {
     name    = "prometheus-k8s"
-    channel = "stable"
+    channel = "latest/stable"
   }
 }
 
@@ -59,7 +59,7 @@ resource "juju_application" "parca" {
 
   charm {
     name    = "parca-k8s"
-    channel = "stable"
+    channel = "latest/stable"
   }
 
   config = {
