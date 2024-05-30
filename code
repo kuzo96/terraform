@@ -10,7 +10,7 @@ provider "juju" {
 }
 
 resource "juju_model" "development" {
-  name = "dev1"
+  name = "dev"
 }
 
 resource "juju_application" "hello-kubecon" {
