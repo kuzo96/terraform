@@ -4,11 +4,11 @@ alias = "aliaslxd"
 }
 
 resource "juju_model" "app" {
-  name = "app1"
+  name = "app"
 }
 
 resource "juju_model" "db" {
-  name = "db02"
+  name = "newdb"
 }
 
 resource "juju_application" "hello_juju" {
