@@ -6,7 +6,9 @@ terraform {
     }
   }
 }
-provider "juju" {}
+provider "juju" {
+alias = "aliascode"
+}
 
 resource "juju_model" "development" {
   name = "dev"
