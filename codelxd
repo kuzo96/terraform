@@ -1,4 +1,6 @@
-provider "juju" {}
+provider "juju" {
+alias = "aliaslxd"
+}
 
 resource "juju_model" "app" {
   name = "app"
