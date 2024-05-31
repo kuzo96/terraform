@@ -26,8 +26,3 @@ resource "juju_application" "wordpress" {
   units = 3
 }
 
-  application {
-    name     = juju_application.wordpress.name
-    endpoint = "db"
-  }
-}
