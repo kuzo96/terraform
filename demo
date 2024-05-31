@@ -20,13 +20,12 @@ resource "juju_machine" "this_machine" {
 }
 resource "juju_application" "mysql" {
   name = "mysql"
-  channel = "8.0/stable"
 
   model = juju_model.demo.name
 
   charm {
-    name = "wordpress"
-    channel = "latest/stable"
+    name = "mysql"
+    channel = "8.0/stable"
   }
 }
 
