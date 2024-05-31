@@ -15,7 +15,7 @@ resource "juju_model" "lab2" {
 
 resource "juju_application" "hello-kubecon" {
   name  = "hello-kubecon"
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
   charm {
     name = "hello-kubecon"
   }
@@ -23,7 +23,7 @@ resource "juju_application" "hello-kubecon" {
 
 resource "juju_application" "zinc" {
   name  = "zinc"
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
   trust = true
 
   charm {
@@ -33,7 +33,7 @@ resource "juju_application" "zinc" {
 
 resource "juju_application" "grafana" {
   name  = "grafana"
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
   trust = true
 
   charm {
@@ -44,7 +44,7 @@ resource "juju_application" "grafana" {
 
 resource "juju_application" "prometheus" {
   name  = "prometheus"
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
   trust = true
 
   charm {
@@ -55,7 +55,7 @@ resource "juju_application" "prometheus" {
 
 resource "juju_application" "parca" {
   name  = "parca"
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
   trust = true
 
   charm {
@@ -69,7 +69,7 @@ resource "juju_application" "parca" {
 }
 
 resource "juju_integration" "prometheus-grafana" {
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   application {
     name     = juju_application.prometheus.name
@@ -83,7 +83,7 @@ resource "juju_integration" "prometheus-grafana" {
 }
 
 resource "juju_integration" "prometheus-zinc" {
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   application {
     name = juju_application.prometheus.name
@@ -95,7 +95,7 @@ resource "juju_integration" "prometheus-zinc" {
 }
 
 resource "juju_integration" "grafana-zinc" {
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   application {
     name = juju_application.grafana.name
@@ -107,7 +107,7 @@ resource "juju_integration" "grafana-zinc" {
 }
 
 resource "juju_integration" "parca-zinc" {
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   application {
     name = juju_application.parca.name
@@ -119,7 +119,7 @@ resource "juju_integration" "parca-zinc" {
 }
 
 resource "juju_integration" "parca-prometheus" {
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   application {
     name = juju_application.prometheus.name
