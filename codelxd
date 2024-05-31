@@ -3,12 +3,12 @@ provider "juju" {
 alias = "aliaslxd"
 }
 
-resource "juju_model" "app" {
-  name = "app"
+resource "juju_model" "lab" {
+  name = "lab"
 }
 
-resource "juju_model" "db" {
-  name = "newdb"
+resource "juju_model" "lab" {
+  name = "lab"
 }
 
 resource "juju_application" "hello_juju" {
