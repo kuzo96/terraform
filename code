@@ -11,6 +11,11 @@ provider "juju" {
 
 resource "juju_model" "lab2" {
   name = "lab2"
+
+  cloud {
+    name   = "cpt-k8s"
+    region = "default "
+  }
 }
 
 resource "juju_application" "hello-kubecon" {
