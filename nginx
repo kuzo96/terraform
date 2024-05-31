@@ -1,0 +1,25 @@
+terraform {
+  required_providers {
+    juju = {
+      source = "juju/juju"
+      version = "0.12.0"
+    }
+  }
+}
+
+provider "juju" {
+  controller_name = "cpt-openstack-regionone"  # Replace with your Juju controller name
+  model_name      = "openstack"              # Replace with your Juju model name
+}
+
+resource "juju_application" "nginx" {
+  name      = "nginx"
+  charm     = "cs:nginx-34"  # Charm store identifier for NGINX charm
+  num_units = 1
+  series    = "jammy"        # Replace with the appropriate series
+}
+
+resource "juju_unit" "nginx_unit" {
+  name      = juju_application.nginx.name
+  num_units = 1
+}
