@@ -5,7 +5,7 @@ alias = "aliaslxd"
 
 resource "juju_application" "hello_juju" {
   name  = "myapp"
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   charm {
     name = "hello-juju"
@@ -14,7 +14,7 @@ resource "juju_application" "hello_juju" {
 
 resource "juju_application" "postgresql" {
   name  = "database"
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   charm {
     name = "postgresql"
@@ -22,13 +22,13 @@ resource "juju_application" "postgresql" {
 }
 
 resource "juju_offer" "postgresql_offer" {
-  model            = juju_model.lab.name
+  model            = juju_model.lab2.name
   application_name = juju_application.postgresql.name
   endpoint         = "db"
 }
 
 resource "juju_integration" "postgresql_hello_juju" {
-  model = juju_model.lab.name
+  model = juju_model.lab2.name
 
   application {
     name     = juju_application.hello_juju.name
