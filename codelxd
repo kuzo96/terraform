@@ -22,7 +22,7 @@ resource "juju_application" "hello_juju" {
 }
 
 resource "juju_application" "postgresql" {
-  name  = "database"
+  name  = "databasepgsql"
   model = juju_model.lablxd.name
 
   charm {
