@@ -9,8 +9,8 @@ terraform {
 provider "juju" {
 }
 
-resource "juju_model" "development" {
-  name = "dev"
+resource "juju_model" "lab" {
+  name = "lab"
 }
 
 resource "juju_application" "hello-kubecon" {
