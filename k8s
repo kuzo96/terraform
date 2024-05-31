@@ -8,6 +8,20 @@ terraform {
 }
 provider "juju" {}
 
+resource "kubernetes_namespace" "testk8s" {
+  metadata {
+    annotations = {
+      name = "example-annotation"
+    }
+
+    labels = {
+      mylabel = "label-value"
+    }
+
+    name = "testk8s"
+  }
+}
+
 resource "juju_model" "testk8s" {
   name = "testk8s"
 
