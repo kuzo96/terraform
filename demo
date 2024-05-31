@@ -14,8 +14,8 @@ resource "juju_model" "demo" {
 
 }
 
-resource "juju_application" "wordpress" {
-  name = "wordpress"
+resource "juju_application" "mysql" {
+  name = "mysql"
 
   model = juju_model.demo.name
 
@@ -23,6 +23,5 @@ resource "juju_application" "wordpress" {
     name = "wordpress"
     channel = "latest/stable"
   }
-  units = 3
 }
 
