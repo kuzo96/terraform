@@ -8,31 +8,10 @@ terraform {
 }
 provider "juju" {}
 
-resource "juju_model" "testk8s" {
-  name = "testk8s"
-  cloud {
-    name   = "cpt-k8s"
-    region = "default"
-  }
-}
-
-resource "kubernetes_namespace" "testk8s" {
-  metadata {
-    annotations = {
-      name = "example-annotation"
-    }
-
-    labels = {
-      mylabel = "label-value"
-    }
-    name = "testk8s"
-  }
-}
-
 resource "juju_application" "wordpress-k8s" {
   name = "wordpress-k8s"
 
-  model = juju_model.testk8s.name
+  model = juju_model.demok8s.name
 
   charm {
     name = "wordpress-k8s"
