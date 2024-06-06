@@ -8,8 +8,8 @@ terraform {
 }
 provider "juju" {}
 
-resource "juju_model" "demo" {
-  name = "demo"
+resource "juju_model" "testk8s" {
+  name = "testk8s"
   cloud {
     name   = "cpt-k8s"
     region = "default"
