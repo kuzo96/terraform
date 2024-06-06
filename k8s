@@ -8,8 +8,9 @@ terraform {
 }
 provider "juju" {}
 
-resource "juju_model" "this" {
+resource "juju_model" "testk8s" {
  }
+
 resource "juju_application" "wordpress-k8s" {
   name = "wordpress-k8s"
   model = juju_model.testk8s.name
