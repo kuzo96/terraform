@@ -11,8 +11,15 @@ provider "juju" {}
 resource "juju_model" "this" {
  name = "testk8s"
   cloud {
-    name   = "cpt-openstack"
-    region = "RegionOne"
+    name   = "cpt-k8s"
+    region = "default"
    }
  }
-
+resource "juju_application" "wordpress-k8s" {
+  name = "wordpress-k8s"
+  model = juju_model.testk8s.name
+  charm {
+    name = "wordpress-k8s"
+    channel = "latest/stable"
+  }
+}
