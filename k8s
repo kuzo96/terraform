@@ -11,8 +11,8 @@ provider "juju" {}
 resource "juju_model" "this" {
  name = "testk8s"
   cloud {
-    name   = "cpt-k8s"
- 
+    name   = "cpt-openstack"
+    region = "RegionOne"
    }
  }
 
